@@ -1,0 +1,22 @@
+{
+  "templateId": "next-bnb-cottage",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "fullPage": false,
+  "captures": [
+    {
+      "mode": "light",
+      "sha256": "e36fc5d5dac81e8cbd96cbcc2d38e0ccb3ba425fae0297109d09867d6cdb1abc",
+      "file": "jamstacks/home-light.jpg",
+      "bytes": 221504
+    },
+    {
+      "mode": "dark",
+      "sha256": "6d73ce0493b99eac02bae90aeed93e039f42cf5ded18fd81e3aaf655249d1fa9",
+      "file": "jamstacks/home-dark.jpg",
+      "bytes": 205059
+    }
+  ]
+}

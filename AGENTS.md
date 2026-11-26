@@ -17,6 +17,16 @@ The `.claude/skills/` folder holds `write-plan` (drafts `plan/PLAN.md`) and `cle
 
 ## Structure and content
 
+File ownership for Honeysuckle Cottage B&B:
+- `content/business.ts` — shared business details, address, directions, check-in/out & breakfast times, daily phone hours and enquiry guidance.
+- `content/rooms.ts` — the four rooms (`pricePerNightGBP`, `openForEnquiries`, features) and shared amenities.
+- `content/breakfast.ts` — breakfast sections, dishes, supplements, dietary marks, `available` and `seasonal` flags.
+- `content/local-guide.ts` — numbered pins (`mapPin`; on-foot places add `mapX`/`mapY` percentages on the painted map in `public/map/` and optional `mapLabel`), distances, notes and host tips.
+- `content/house-rules.ts` — sampler rules (deriving check-in/out times from `content/business.ts`) and practical notes.
+- `app/**/page.tsx` — page-specific copy (headings, intros, prose, CTAs) as JSX children of named React components.
+- `public/rooms/<id>-light.webp` / `-dark.webp` — painted room windows rendered by `RoomWindow` (Home and `/rooms/`).
+- `components/art/*` — illustration components (`CottageHero`, `RoomWindow`, `HoneysuckleVine`, `WalkingMap`, `Sampler`, dividers, icons, `LostInTheHedge`).
+
 `content/business.ts` holds the starter's shared business details and sample copy. When building a
 site, write page-specific copy directly in the route's `app/**/page.tsx` as JSX children of named React
 components. Put headings, calls to action, labels and captions in page order. Backing components
@@ -72,3 +82,13 @@ and Pages never import/read it. Keep site.config.json, the form and workflow out
 light/dark captures after a fresh normal build and run node --test jamstacks/config.test.mjs separately.
 Each new template needs its own business-led layout/fonts/art and OG image; do not ship the neutral
 starter as a final design. Remove `plan/` and `.claude/skills/` before publishing a gallery template once reviewed.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+## This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

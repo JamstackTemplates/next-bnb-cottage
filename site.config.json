@@ -1,7 +1,8 @@
 {
-  "name": "Jamstacks starter",
-  "description": "A neutral Next.js foundation for Jamstacks websites.",
-  "domain": "",
+  "name": "Honeysuckle Cottage B&B",
+  "description": "A four-room Cotswold-stone B&B in Bibury with cooked breakfasts, garden rooms and walks from the door. Enquire about dates.",
+  "domain": "next-bnb-cottage.jamstacks.net",
+  "timeZone": "Europe/London",
   "jamstacks": {
     "siteId": "",
     "cdnUrl": "https://cdn.jamstacks.net"

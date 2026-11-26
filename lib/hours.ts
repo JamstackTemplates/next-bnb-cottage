@@ -11,6 +11,7 @@ export interface OpeningHours {
 }
 const clock = /^([01]\d|2[0-3]):[0-5]\d$/;
 const minutes = (value: string) => Number(value.slice(0, 2)) * 60 + Number(value.slice(3));
+
 export function validateHours(hours: readonly OpeningHours[]): void {
   for (const day of DAYS) {
     const matches = hours.filter(entry => entry.day === day);
@@ -23,25 +24,69 @@ export function validateHours(hours: readonly OpeningHours[]): void {
   }
   if (hours.length !== 7) throw new Error('hours: expected seven weekdays');
 }
+
+function localClock(timeZone: string, now: Date): { index: number; current: number } | null {
+  if (!timeZone) return null;
+  let parts: Intl.DateTimeFormatPart[];
+  try {
+    parts = new Intl.DateTimeFormat('en-US', {
+      timeZone,
+      weekday: 'long',
+      hour: 'numeric',
+      minute: 'numeric',
+      hourCycle: 'h23',
+    }).formatToParts(now);
+  } catch {
+    return null;
+  }
+  const part = (type: string) => parts.find(entry => entry.type === type)?.value ?? '';
+  const index = DAYS.indexOf(part('weekday') as Day);
+  if (index < 0) return null;
+  return { index, current: Number(part('hour')) * 60 + Number(part('minute')) };
+}
+
 /** Browser callers supply the clock; build/static views never compute current availability. */
 export function openingLabel(hours: readonly OpeningHours[], timeZone: string, now = new Date()): string {
   const fallback = 'See opening hours';
   if (!timeZone) return fallback;
   validateHours(hours);
-  let parts: Intl.DateTimeFormatPart[];
-  try {
-    parts = new Intl.DateTimeFormat('en-US', { timeZone, weekday: 'long', hour: 'numeric', minute: 'numeric', hourCycle: 'h23' }).formatToParts(now);
-  } catch { return fallback; }
-  const part = (type: string) => parts.find(entry => entry.type === type)?.value ?? '';
-  const index = DAYS.indexOf(part('weekday') as Day);
-  if (index < 0) return fallback;
-  const current = Number(part('hour')) * 60 + Number(part('minute'));
+  const local = localClock(timeZone, now);
+  if (!local) return fallback;
+  const { index, current } = local;
   const today = hours.find(entry => entry.day === DAYS[index])!;
-  if (today.opens && today.closes && current >= minutes(today.opens) && current < minutes(today.closes)) return `Open now · until ${today.closes}`;
+  if (today.opens && today.closes && current >= minutes(today.opens) && current < minutes(today.closes)) {
+    return `Open now · until ${today.closes}`;
+  }
   for (let offset = 0; offset <= 7; offset++) {
     const day = DAYS[(index + offset) % 7];
     const entry = hours.find(value => value.day === day)!;
-    if (entry.opens && (offset > 0 || current < minutes(entry.opens))) return `Closed · opens ${offset === 0 ? 'today' : day} at ${entry.opens}`;
+    if (entry.opens && (offset > 0 || current < minutes(entry.opens))) {
+      return `Closed · opens ${offset === 0 ? 'today' : day} at ${entry.opens}`;
+    }
   }
   return 'Closed · see opening hours';
+}
+
+export interface PhoneLineStatus {
+  open: boolean | null;
+  label: string;
+}
+
+export const PHONE_LINE_NEUTRAL = 'Phone daily 8am–8pm (UK time)';
+
+/** Cottage phone-line status computed in the configured IANA time zone. */
+export function phoneLineStatus(
+  hours: readonly OpeningHours[],
+  timeZone: string,
+  now = new Date(),
+): PhoneLineStatus {
+  if (!timeZone) return { open: null, label: PHONE_LINE_NEUTRAL };
+  validateHours(hours);
+  const local = localClock(timeZone, now);
+  if (!local) return { open: null, label: PHONE_LINE_NEUTRAL };
+  const today = hours.find(entry => entry.day === DAYS[local.index])!;
+  if (today.opens && today.closes && local.current >= minutes(today.opens) && local.current < minutes(today.closes)) {
+    return { open: true, label: 'Phone answered now' };
+  }
+  return { open: false, label: 'Phone line opens at 8am — email any time' };
 }

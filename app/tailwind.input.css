@@ -1,112 +1,677 @@
 @import 'tailwindcss';
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* ==========================================================================
+   Honeysuckle Cottage B&B — Linocut Tea Towel & Honeysuckle Casement System
+   Light: "linen in the morning" | Dark: "the garden after dusk"
+   ========================================================================== */
+
 :root {
-  --bg: #f7f8fa;
-  --surface: #ffffff;
-  --text: #172033;
-  --muted: #526078;
-  --accent: #2457a7;
-  --accent-ink: #2457a7;
-  --on-accent: #ffffff;
-  --line: #c7cfdb;
-  --focus: #2457a7;
-  --map-filter: none;
+  --linen: #F6F0E2;
+  --linen-deep: #ECE2CB;
+  --surface: #FFFBF2;
+  --ink: #2B2A33;
+  --muted: #5E5A52;
+  --line: #CDBF9F;
+  --primary: #3F5B3A;
+  --primary-hover: #334B2F;
+  --primary-ink: #2F492B;
+  --on-primary: #FFFFFF;
+  --stone: #D6C08E;
+  --stone-deep: #BFA671;
+  --honeysuckle: #D9775A;
+  --butter: #E9C46A;
+  --river: #7F95A6;
+  --focus: #3F5B3A;
+  --weave-line: rgba(43, 42, 51, 0.048);
+  --gouge-stroke: rgba(255, 251, 242, 0.65);
+  --card-shadow: 0 6px 0 rgba(43, 42, 51, 0.12);
+  --map-filter: sepia(0.18) saturate(0.88) contrast(0.96);
   color-scheme: light;
 }
+
 @media (prefers-color-scheme: dark) {
- :root:not(.light) {
-  --bg: #141923;
-  --surface: #1e2633;
-  --text: #f1f5fa;
-  --muted: #b5c2d5;
-  --accent: #2457a7;
-  --accent-ink: #a9cbff;
-  --on-accent: #ffffff;
-  --line: #61708a;
-  --focus: #a9cbff;
-  --map-filter: grayscale(.4) brightness(.8);
-  color-scheme: dark;
- }
+  :root:not(.light) {
+    --linen: #17201C;
+    --linen-deep: #1E2924;
+    --surface: #26322C;
+    --ink: #EFE7D2;
+    --muted: #B9B29C;
+    --line: #3E4C44;
+    --primary: #466B40;
+    --primary-hover: #3A5A35;
+    --primary-ink: #A7CE9E;
+    --on-primary: #FFFFFF;
+    --stone: #8E7F5E;
+    --stone-deep: #706346;
+    --honeysuckle: #F0B27A;
+    --butter: #F2D58B;
+    --river: #5E7686;
+    --focus: #F2D58B;
+    --weave-line: rgba(239, 231, 210, 0.045);
+    --gouge-stroke: rgba(23, 32, 28, 0.5);
+    --card-shadow: 0 6px 0 rgba(0, 0, 0, 0.35);
+    --map-filter: grayscale(0.42) brightness(0.76) contrast(1.06);
+    color-scheme: dark;
+  }
 }
+
 :root.dark {
-  --bg: #141923;
-  --surface: #1e2633;
-  --text: #f1f5fa;
-  --muted: #b5c2d5;
-  --accent: #2457a7;
-  --accent-ink: #a9cbff;
-  --on-accent: #ffffff;
-  --line: #61708a;
-  --focus: #a9cbff;
-  --map-filter: grayscale(.4) brightness(.8);
+  --linen: #17201C;
+  --linen-deep: #1E2924;
+  --surface: #26322C;
+  --ink: #EFE7D2;
+  --muted: #B9B29C;
+  --line: #3E4C44;
+  --primary: #466B40;
+  --primary-hover: #3A5A35;
+  --primary-ink: #A7CE9E;
+  --on-primary: #FFFFFF;
+  --stone: #8E7F5E;
+  --stone-deep: #706346;
+  --honeysuckle: #F0B27A;
+  --butter: #F2D58B;
+  --river: #5E7686;
+  --focus: #F2D58B;
+  --weave-line: rgba(239, 231, 210, 0.045);
+  --gouge-stroke: rgba(23, 32, 28, 0.5);
+  --card-shadow: 0 6px 0 rgba(0, 0, 0, 0.35);
+  --map-filter: grayscale(0.42) brightness(0.76) contrast(1.06);
   color-scheme: dark;
 }
 
 @theme {
   --color-*: initial;
-  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --radius-ui: .375rem;
+  --font-display: 'IM Fell English', Georgia, 'Times New Roman', serif;
+  --font-sc: 'IM Fell English SC', Georgia, serif;
+  --font-sans: 'Rosario Variable', 'Rosario', system-ui, -apple-system, sans-serif;
+  --font-hand: 'Cedarville Cursive', Georgia, cursive;
+  --radius-ui: 0.25rem;
 }
+
 @theme inline {
-  --color-bg: var(--bg);
+  --color-linen: var(--linen);
+  --color-linen-deep: var(--linen-deep);
   --color-surface: var(--surface);
-  --color-ink: var(--text);
+  --color-ink: var(--ink);
   --color-muted: var(--muted);
-  --color-accent: var(--accent);
-  --color-accent-ink: var(--accent-ink);
-  --color-on-accent: var(--on-accent);
   --color-line: var(--line);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-ink: var(--primary-ink);
+  --color-on-primary: var(--on-primary);
+  --color-stone: var(--stone);
+  --color-stone-deep: var(--stone-deep);
+  --color-honeysuckle: var(--honeysuckle);
+  --color-butter: var(--butter);
+  --color-river: var(--river);
+  /* Footer deep-ivy printed band — dark in both themes */
+  --color-ivy-night: #1B2A22;
+  --color-ivy-ink: #EFE7D2;
+  --color-ivy-muted: #C7C0AB;
+  --color-ivy-line: #394D41;
+  --color-ivy-butter: #F2D58B;
 }
+
+/* Jamstacks hosted form & dark mode toggle integration */
 :root {
-  --measure: 42rem;
+  --measure: 40rem;
   --jamstacks-font-family: var(--font-sans);
-  --jamstacks-color-text: var(--text);
+  --jamstacks-color-text: var(--ink);
   --jamstacks-color-background: var(--surface);
-  --jamstacks-color-primary: var(--accent);
+  --jamstacks-color-primary: var(--primary);
   --jamstacks-color-border: var(--line);
   --jamstacks-color-muted: var(--muted);
-  --jamstacks-color-link: var(--accent-ink);
+  --jamstacks-color-link: var(--primary-ink);
   --jamstacks-border-radius: var(--radius-ui);
   --jamstacks-control-height: 2.75rem;
   --jamstacks-spacing: 1rem;
   --jamstacks-form-max-width: 40rem;
-  --jamstacks-toggle-color: var(--text);
-  --jamstacks-toggle-dark-color: var(--text);
+  --jamstacks-toggle-color: var(--ink);
+  --jamstacks-toggle-dark-color: var(--ink);
   --jamstacks-toggle-border: var(--line);
   --jamstacks-toggle-background: var(--surface);
   --jamstacks-toggle-dark-background: var(--surface);
   --jamstacks-toggle-focus-color: var(--focus);
 }
+
 @layer base {
-  html { background: var(--bg); color: var(--text); font-family: var(--font-sans); scroll-padding-top: 1.5rem; }
-  body { margin: 0; line-height: 1.6; }
-  main { min-height: 65vh; }
-  a { text-underline-offset: .2em; }
-  a:hover { text-decoration: underline; }
-  button { cursor: pointer; }
-  :focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
-  [aria-current="page"] { text-decoration: underline; }
+  html {
+    background-color: var(--linen);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    scroll-padding-top: 2rem;
+  }
+
+  body {
+    margin: 0;
+    line-height: 1.62;
+    background-color: var(--linen);
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 7px,
+        var(--weave-line) 7px,
+        var(--weave-line) 8px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 9px,
+        var(--weave-line) 9px,
+        var(--weave-line) 10px
+      );
+    overflow-x: clip;
+  }
+
+  main {
+    min-height: 65vh;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.12;
+  }
+
+  a {
+    text-underline-offset: 0.22em;
+    text-decoration-thickness: 1.5px;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  [aria-current="page"] {
+    text-decoration: underline;
+    text-decoration-color: var(--honeysuckle);
+    text-decoration-thickness: 2px;
+  }
 }
-@utility wrap { width: min(100% - 2rem, 72rem); margin-inline: auto; }
+
+@utility wrap {
+  width: min(100% - 2rem, 74rem);
+  margin-inline: auto;
+}
+
 @layer components {
-  .button { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; padding: .6rem 1.2rem; border: 1px solid var(--accent); border-radius: var(--radius-ui); background: var(--accent); color: var(--on-accent); font-weight: 600; text-decoration: none; }
-  .button:hover { text-decoration: underline; }
-  .button-quiet { background: var(--surface); color: var(--accent-ink); border-color: var(--line); }
-  .text-link { color: var(--accent-ink); text-decoration: underline; }
-  .eyebrow { font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
-  .skip-link { position: absolute; left: 1rem; top: -8rem; padding: .75rem; z-index: 200; background: var(--surface); }
-  .skip-link:focus { top: 1rem; }
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding: 0.65rem 1.35rem;
+    border: 2px solid var(--ink);
+    border-radius: var(--radius-ui);
+    background-color: var(--primary);
+    color: var(--on-primary);
+    font-family: var(--font-sc);
+    font-size: 1.02rem;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    box-shadow: 3px 3px 0 var(--ink);
+    transition: background-color 140ms ease, transform 140ms ease, box-shadow 140ms ease;
+  }
+
+  .button:hover {
+    background-color: var(--primary-hover);
+    text-decoration: none;
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+
+  .button:active {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0 var(--ink);
+  }
+
+  .button-quiet {
+    background-color: var(--surface);
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+
+  .button-quiet:hover {
+    background-color: var(--linen-deep);
+    color: var(--ink);
+  }
+
+  .button-on-dark {
+    background-color: var(--surface);
+    color: var(--ink);
+    border-color: var(--butter);
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.45);
+  }
+
+  .button-on-dark:hover {
+    background-color: var(--butter);
+    color: #1B2A22;
+  }
+
+  .text-link {
+    color: var(--primary-ink);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--primary-ink) 55%, transparent);
+  }
+
+  .text-link:hover {
+    text-decoration-color: currentColor;
+  }
+
+  .kicker {
+    font-family: var(--font-sc);
+    font-size: 0.92rem;
+    letter-spacing: 0.1em;
+    color: var(--primary-ink);
+  }
+
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -8rem;
+    padding: 0.75rem 1.1rem;
+    z-index: 200;
+    background: var(--surface);
+    color: var(--ink);
+    border: 2px solid var(--ink);
+    font-family: var(--font-sc);
+  }
+
+  .skip-link:focus {
+    top: 1rem;
+  }
+
+  /* Linen weave bands */
+  .linen-band {
+    background-color: var(--linen-deep);
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 6px,
+        var(--weave-line) 6px,
+        var(--weave-line) 7px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 8px,
+        var(--weave-line) 8px,
+        var(--weave-line) 9px
+      );
+  }
+
+  /* Cotswold stone wall band for the four cottage windows on Home */
+  .stone-wall-band {
+    background-color: color-mix(in srgb, var(--stone) 45%, var(--linen-deep));
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 34px,
+        color-mix(in srgb, var(--ink) 12%, transparent) 34px,
+        color-mix(in srgb, var(--ink) 12%, transparent) 36px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 82px,
+        color-mix(in srgb, var(--ink) 8%, transparent) 82px,
+        color-mix(in srgb, var(--ink) 8%, transparent) 84px
+      );
+  }
+
+  /* Printed cloth frame with carved ink border */
+  .linocut-frame {
+    background-color: var(--surface);
+    border: 2px solid var(--ink);
+    box-shadow: var(--card-shadow);
+  }
+
+  .stitched-border {
+    border: 2px dashed var(--line);
+  }
+
+  /* Dotted leader row (breakfast menu & room specifications) */
+  .leader-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+
+  .leader-dots {
+    flex: 1 1 1.5rem;
+    min-width: 1rem;
+    border-bottom: 1.5px dotted var(--line);
+    transform: translateY(-0.22rem);
+  }
+
+  /* Filter chips */
+  .filter-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 2.5rem;
+    padding: 0.35rem 0.9rem;
+    border: 1.5px solid var(--ink);
+    border-radius: 999px;
+    background-color: var(--surface);
+    color: var(--ink);
+    font-family: var(--font-sc);
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+    transition: background-color 140ms ease, color 140ms ease;
+  }
+
+  .filter-chip:hover {
+    background-color: var(--linen-deep);
+  }
+
+  .filter-chip[aria-pressed="true"] {
+    background-color: var(--primary);
+    color: var(--on-primary);
+    border-color: var(--ink);
+  }
 }
-.map iframe { width: 100%; min-height: 20rem; border: 0; filter: var(--map-filter); }
-.enquiry__host { display: block; }
-.enquiry__status { margin-top: 1rem; color: var(--muted); }
-.enquiry[data-state="present"] > .enquiry__status { display: none; }
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+
+/* Hero light/dark illustration crossfade & seamless vignette edge mask */
+.hero-illustration {
+  -webkit-mask-image: radial-gradient(ellipse 52% 52% at 50% 50%, #000 72%, transparent 100%);
+  mask-image: radial-gradient(ellipse 52% 52% at 50% 50%, #000 72%, transparent 100%);
 }
+
+.hero-img-dark {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-img-dark {
+    transition: opacity 260ms ease;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) .hero-img-dark {
+    opacity: 1;
+  }
+}
+
+:root.dark .hero-img-dark {
+  opacity: 1;
+}
+
+/* Dusk-only & day-only SVG layers for dark mode */
+.dusk-only {
+  opacity: 0;
+  transition: opacity 260ms ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) .dusk-only {
+    opacity: 1;
+  }
+  :root:not(.light) .day-only {
+    opacity: 0.25;
+  }
+}
+
+:root.dark .dusk-only {
+  opacity: 1;
+}
+
+:root.dark .day-only {
+  opacity: 0.25;
+}
+
+/* Painted room window vignettes (home "rooms at a glance") */
+.room-window {
+  border: 2px solid var(--ink);
+  border-radius: 2px;
+  background: var(--stone);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .room-window {
+    transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 260ms ease;
+  }
+
+  .casement-trigger:hover .room-window,
+  .casement-trigger:focus-visible .room-window {
+    transform: translate(-2px, -3px) rotate(-0.6deg);
+    box-shadow: 6px 7px 0 var(--ink);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Progressive-enhancement scroll reveal (modern-web-guidance: scroll-entry-exit-effects) */
+  @supports ((animation-timeline: view()) and (animation-range: entry)) {
+    @keyframes cottage-reveal {
+      entry 0% {
+        transform: translateY(1rem);
+      }
+      entry 40% {
+        transform: translateY(0);
+      }
+    }
+
+    .reveal-section {
+      animation: cottage-reveal auto linear both;
+      animation-timeline: view();
+    }
+  }
+}
+
+/* Painted walking map: HTML pins & labels positioned over the illustration by
+   --x/--y percentages, sized in container units so they scale with the map. */
+.walking-map {
+  container-type: inline-size;
+  background: var(--linen-deep);
+}
+
+.map-pin,
+.map-home {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  line-height: 1;
+}
+
+.map-pin {
+  display: flex;
+  align-items: center;
+  gap: 0.45cqw;
+  /* Anchor the teardrop's tip (centre + 0.707 × size) on the mapped feature. */
+  transform: translate(calc(var(--pin) / -2), calc(var(--pin) * -1.21));
+  --pin: clamp(1.35rem, 3.1cqw, 2.6rem);
+}
+
+.map-pin-flip {
+  flex-direction: row-reverse;
+  transform: translate(calc(-100% + var(--pin) / 2), calc(var(--pin) * -1.21));
+}
+
+.map-pin-head {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  isolation: isolate;
+  width: var(--pin);
+  height: var(--pin);
+  color: var(--surface);
+  font-family: var(--font-sc);
+  font-weight: 700;
+  font-size: calc(var(--pin) * 0.5);
+}
+
+/* Teardrop drawn behind the upright number, its sharp corner pointing down. */
+.map-pin-head::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border: 2px solid var(--ink);
+  border-radius: 50% 50% 50% 0;
+  rotate: -45deg;
+  background: var(--honeysuckle);
+  filter: drop-shadow(2px 2px 0 var(--ink));
+}
+
+.map-pin-label,
+.map-home {
+  border: 1.5px solid var(--ink);
+  border-radius: 2px;
+  background: var(--surface);
+  box-shadow: 2px 2px 0 var(--ink);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: clamp(0.72rem, 1.45cqw, 1.12rem);
+  white-space: nowrap;
+  padding: 0.35em 0.6em 0.3em;
+}
+
+.map-home {
+  transform: translate(-50%, -100%);
+  background: var(--primary);
+  border-color: var(--ink);
+  color: var(--on-primary);
+  font-family: var(--font-sc);
+  letter-spacing: 0.06em;
+}
+
+.map-home::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 0.7em;
+  height: 0.7em;
+  background: var(--primary);
+  border-right: 1.5px solid var(--ink);
+  border-bottom: 1.5px solid var(--ink);
+  translate: -50% -50%;
+  rotate: 45deg;
+}
+
+.map-pin[data-active='false'] {
+  opacity: 0.3;
+}
+
+.walking-map-compact .map-home {
+  font-size: clamp(0.62rem, 1.7cqw, 0.9rem);
+}
+
+/* "Further afield" signpost arms for drive destinations: an ink board with a
+   cream face inset 1.5px, so the arrow point keeps its outline; the shadow sits
+   on the unclipped <li>. */
+.signpost-arm {
+  filter: drop-shadow(2px 2px 0 var(--ink));
+  --arm-point: 0.9rem;
+}
+
+.signpost-board {
+  padding: 1.5px;
+  background: var(--ink);
+  clip-path: polygon(0 0, calc(100% - var(--arm-point)) 0, 100% 50%, calc(100% - var(--arm-point)) 100%, 0 100%);
+}
+
+.signpost-face {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 1.5rem 0.45rem 0.5rem;
+  background: var(--surface);
+  clip-path: polygon(0 0, calc(100% - var(--arm-point) + 0.7px) 0, 100% 50%, calc(100% - var(--arm-point) + 0.7px) 100%, 0 100%);
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.signpost-pin {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 9999px;
+  background: var(--primary);
+  color: var(--on-primary);
+  font-family: var(--font-sc);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.signpost-arm[data-active='false'] {
+  opacity: 0.35;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .map-pin,
+  .signpost-arm {
+    transition: opacity 180ms ease;
+  }
+}
+
+/* Map & Jamstacks hosted support form states */
+.map iframe {
+  width: 100%;
+  min-height: 20rem;
+  border: 0;
+  display: block;
+  filter: var(--map-filter);
+}
+
+.enquiry__host {
+  display: block;
+}
+
+.enquiry__status {
+  margin-top: 1rem;
+  color: var(--muted);
+}
+
+.enquiry[data-state="present"] > .enquiry__status {
+  display: none;
+}
+
+/* Print: clean black-on-white lists, textures and art hidden */
 @media print {
-  nav, .skip-link, .enquiry, button { display: none !important; }
-  html { background: white; color: black; }
-  a { color: inherit; }
+  nav,
+  .skip-link,
+  .enquiry,
+  .no-print,
+  .hero-img-dark,
+  button {
+    display: none !important;
+  }
+
+  html,
+  body,
+  .linen-band,
+  .stone-wall-band,
+  .linocut-frame {
+    background: #ffffff !important;
+    background-image: none !important;
+    color: #000000 !important;
+    box-shadow: none !important;
+  }
+
+  a {
+    color: inherit !important;
+  }
 }
